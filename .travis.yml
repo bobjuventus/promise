@@ -20,7 +20,7 @@ script:
 after_success:
 - coveralls
 matrix:
-  fast_finish: true
+  fast_finish: false
   include:
   - python: '2.7'
     script: flake8
