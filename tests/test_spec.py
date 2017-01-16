@@ -1,7 +1,7 @@
 # Tests the spec based on:
 # https://github.com/promises-aplus/promises-tests
 
-from promise import Promise
+from promises import Promise
 from .utils import assert_exception
 
 

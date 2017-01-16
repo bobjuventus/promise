@@ -1,12 +1,11 @@
 from setuptools import setup
 
 setup(
-    name='promise',
-    version='1.0.1',
-    description='Promises/A+ implementation for Python',
+    name='promises',
+    version='1.1.0',
+    description='(Fork of) Promises/A+ implementation for Python',
     long_description=open('README.rst').read(),
-    url='https://github.com/syrusakbary/promise',
-    download_url='https://github.com/syrusakbary/promise/releases',
+    url='https://github.com/p2p-today/promise',
     author='Syrus Akbary',
     author_email='me@syrusakbary.com',
     license='MIT',
@@ -25,7 +24,7 @@ setup(
     ],
 
     keywords='concurrent future deferred promise',
-    packages=["promise"],
+    packages=["promises"],
     install_requires=[
         'typing',
     ],

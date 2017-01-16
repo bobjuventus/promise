@@ -1,7 +1,7 @@
 from asyncio import coroutine
 from pytest import mark
 from time import sleep
-from promise import Promise
+from promises import Promise
 
 
 @mark.asyncio

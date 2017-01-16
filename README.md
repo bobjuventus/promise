@@ -9,26 +9,26 @@ Its fully compatible with the [Promises/A+ spec](http://promises-aplus.github.io
 [![pypi][pypi-image]][pypi-url]
 [![coveralls][coveralls-image]][coveralls-url]
 
-[travis-image]: https://img.shields.io/travis/syrusakbary/promise.svg?style=flat
-[travis-url]: https://travis-ci.org/syrusakbary/promise
-[pypi-image]: https://img.shields.io/pypi/v/promise.svg?style=flat
-[pypi-url]: https://pypi.python.org/pypi/promise
-[coveralls-image]: https://coveralls.io/repos/syrusakbary/promise/badge.svg?branch=master&service=github
-[coveralls-url]: https://coveralls.io/github/syrusakbary/promise?branch=master
+[travis-image]: https://img.shields.io/travis/syrusakbary/promises.svg?style=flat
+[travis-url]: https://travis-ci.org/syrusakbary/promises
+[pypi-image]: https://img.shields.io/pypi/v/promises.svg?style=flat
+[pypi-url]: https://pypi.python.org/pypi/promises
+[coveralls-image]: https://coveralls.io/repos/syrusakbary/promises/badge.svg?branch=master&service=github
+[coveralls-url]: https://coveralls.io/github/syrusakbary/promises?branch=master
 
 ## Installation
 
-    $ pip install promise
+    $ pip install promises
 
 
 ## Usage
 
-The example below shows how you can load the promise library.  It then demonstrates creating a promise from scratch.  You simply call `Promise(fn)`.  There is a complete specification for what is returned by this method in [Promises/A+](http://promises-aplus.github.com/promises-spec/).
+The example below shows how you can load the promises library.  It then demonstrates creating a promises from scratch.  You simply call `Promise(fn)`.  There is a complete specification for what is returned by this method in [Promises/A+](http://promises-aplus.github.com/promises-spec/).
 
 ```python
-from promise import Promise
+from promises import Promise
 
-promise = Promise(
+promises = Promise(
     lambda resolve, reject: resolve('RESOLVED!')
 )
 ```
@@ -38,15 +38,15 @@ promise = Promise(
 Before all examples, you will need:
 
 ```python
-from promise import Promise
+from promises import Promise
 ```
 
 ### Promise(resolver)
 
-This creates and returns a new promise.  `resolver` must be a function.  The `resolver` function is passed two arguments:
+This creates and returns a new promises.  `resolver` must be a function.  The `resolver` function is passed two arguments:
 
- 1. `resolve` should be called with a single argument.  If it is called with a non-promise value then the promise is fulfilled with that value.  If it is called with a promise (A) then the returned promise takes on the state of that new promise (A).
- 2. `reject` should be called with a single argument.  The returned promise will be rejected with that argument.
+ 1. `resolve` should be called with a single argument.  If it is called with a non-promises value then the promises is fulfilled with that value.  If it is called with a promises (A) then the returned promises takes on the state of that new promises (A).
+ 2. `reject` should be called with a single argument.  The returned promises will be rejected with that argument.
 
 ### Class Methods
 
@@ -54,15 +54,15 @@ This creates and returns a new promise.  `resolver` must be a function.  The `re
 
 #### Promise.resolve(value)
 
-Converts values and foreign promises into Promises/A+ promises.  If you pass it a value then it returns a Promise for that value.  If you pass it something that is close to a promise (such as a jQuery attempt at a promise) it returns a Promise that takes on the state of `value` (rejected or fulfilled).
+Converts values and foreign promises into Promises/A+ promises.  If you pass it a value then it returns a Promise for that value.  If you pass it something that is close to a promises (such as a jQuery attempt at a promises) it returns a Promise that takes on the state of `value` (rejected or fulfilled).
 
 #### Promise.rejected(value)
 
-Returns a rejected promise with the given value.
+Returns a rejected promises with the given value.
 
 #### Promise.all(list)
 
-Returns a promise for a list.  If it is called with a single argument then this returns a promise for a copy of that list with any promises replaced by their fulfilled values.  e.g.
+Returns a promises for a list.  If it is called with a single argument then this returns a promises for a copy of that list with any promises replaced by their fulfilled values.  e.g.
 
 ```python
 p = Promise.all([Promise.resolve('a'), 'b', Promise.resolve('c')]) \
@@ -74,38 +74,38 @@ assert p.get() is True
 #### Promise.promisify(obj)
 
 This function wraps the `obj` act as a `Promise` if possible.
-Python `Future`s are supported, with a callback to `promise.done` when resolved.
+Python `Future`s are supported, with a callback to `promises.done` when resolved.
 
 
 #### Promise.for_dict(d)
 
 A special function that takes a dictionary of promises and turns them
-into a promise for a dictionary of values.  In other words, this turns
-an dictionary of promises for values into a promise for a dictionary
+into a promises for a dictionary of values.  In other words, this turns
+an dictionary of promises for values into a promises for a dictionary
 of values.
 
 
 ### Instance Methods
 
-These methods are invoked on a promise instance by calling `myPromise.methodName`
+These methods are invoked on a promises instance by calling `myPromise.methodName`
 
-### promise.then(on_fulfilled, on_rejected)
+### promises.then(on_fulfilled, on_rejected)
 
 This method follows the [Promises/A+ spec](http://promises-aplus.github.io/promises-spec/).  It explains things very clearly so I recommend you read it.
 
 Either `on_fulfilled` or `on_rejected` will be called and they will not be called more than once.  They will be passed a single argument and will always be called asynchronously (in the next turn of the event loop).
 
-If the promise is fulfilled then `on_fulfilled` is called.  If the promise is rejected then `on_rejected` is called.
+If the promises is fulfilled then `on_fulfilled` is called.  If the promises is rejected then `on_rejected` is called.
 
-The call to `.then` also returns a promise.  If the handler that is called returns a promise, the promise returned by `.then` takes on the state of that returned promise.  If the handler that is called returns a value that is not a promise, the promise returned by `.then` will be fulfilled with that value. If the handler that is called throws an exception then the promise returned by `.then` is rejected with that exception.
+The call to `.then` also returns a promises.  If the handler that is called returns a promises, the promises returned by `.then` takes on the state of that returned promises.  If the handler that is called returns a value that is not a promises, the promises returned by `.then` will be fulfilled with that value. If the handler that is called throws an exception then the promises returned by `.then` is rejected with that exception.
 
-#### promise.catch(on_rejected)
+#### promises.catch(on_rejected)
 
-Sugar for `promise.then(None, on_rejected)`, to mirror `catch` in synchronous code.
+Sugar for `promises.then(None, on_rejected)`, to mirror `catch` in synchronous code.
 
-#### promise.done(on_fulfilled, on_rejected)
+#### promises.done(on_fulfilled, on_rejected)
 
-The same semantics as `.then` except that it does not return a promise and any exceptions are re-thrown so that they can be logged (crashing the application in non-browser environments)
+The same semantics as `.then` except that it does not return a promises and any exceptions are re-thrown so that they can be logged (crashing the application in non-browser environments)
 
 ## Other package functions
 
@@ -120,4 +120,4 @@ This package is heavily insipired in [aplus](https://github.com/xogeny/aplus).
 
 ## License
 
-[MIT License](https://github.com/syrusakbary/promise/blob/master/LICENSE)
+[MIT License](https://github.com/syrusakbary/promises/blob/master/LICENSE)

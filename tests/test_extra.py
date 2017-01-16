@@ -3,7 +3,7 @@
 from time import sleep
 from pytest import raises, fixture
 
-from promise import (
+from promises import (
     Promise,
     is_thenable,
     promisify as free_promisify,

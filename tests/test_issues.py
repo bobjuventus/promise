@@ -1,6 +1,6 @@
 # This tests reported issues in the Promise package
 from concurrent.futures import ThreadPoolExecutor
-from promise import Promise
+from promises import Promise
 executor = ThreadPoolExecutor(max_workers=40000);
 
 

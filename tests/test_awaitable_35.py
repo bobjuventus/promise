@@ -1,6 +1,6 @@
 from asyncio import sleep, Future
 from pytest import mark
-from promise import Promise, promisify, is_thenable
+from promises import Promise, promisify, is_thenable
 
 
 @mark.asyncio
