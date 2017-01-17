@@ -16,7 +16,7 @@ install:
   fi
 - pip install -e .
 script:
-- py.test --cov=promises tests
+- py.test --cov=async_promises tests
 after_success:
 - coveralls
 matrix:
@@ -27,4 +27,4 @@ matrix:
   - python: '3.5'
     script: |
       pip install mypy-lang
-      mypy promises/  --check-untyped-defs
+      mypy async_promises/  --check-untyped-defs

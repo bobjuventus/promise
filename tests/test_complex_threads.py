@@ -1,6 +1,6 @@
 from time import sleep
 from concurrent.futures import ThreadPoolExecutor
-from promises import Promise
+from async_promises import Promise
 from operator import mul
 executor = ThreadPoolExecutor(max_workers=40000);
 

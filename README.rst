@@ -3,13 +3,13 @@ Promise
 
 This is a implementation of Promises in Python. It is a super set of
 Promises/A+ designed to have readable, performant code and to provide
-just the extensions that are absolutely necessary for using promises in
+just the extensions that are absolutely necessary for using async_promises in
 Python.
 
-This was forked to make it fully compatible with the `Promises/A+
-spec <http://promises-aplus.github.io/promises-spec/>`__
+This was forked to make it fully compatible with the `Promise/A+
+spec <http://promise-aplus.github.io/promise-spec/>`__
 
-On completion of `promises PR #20 <https://github.com/syrusakbary/promises/pull/20>`__,
+On completion of `promise PR #20 <https://github.com/syrusakbary/promise/pull/20>`__,
 maintenence for this fork will be dropped.
 
 |travis| |pypi| |coveralls|
@@ -19,22 +19,22 @@ Installation
 
 ::
 
-    $ pip install promises
+    $ pip install async_promises
 
 Usage
 -----
 
-The example below shows how you can load the promises library. It then
-demonstrates creating a promises from scratch. You simply call
+The example below shows how you can load the async_promises library. It then
+demonstrates creating a async_promises from scratch. You simply call
 ``Promise(fn)``. There is a complete specification for what is returned
 by this method in
-`Promises/A+ <http://promises-aplus.github.com/promises-spec/>`__.
+`Promise/A+ <http://promise-aplus.github.com/promise-spec/>`__.
 
 .. code:: python
 
-    from promises import Promise
+    from async_promises import Promise
 
-    promises = Promise(
+    async_promises = Promise(
         lambda resolve, reject: resolve('RESOLVED!')
     )
 
@@ -45,20 +45,20 @@ Before all examples, you will need:
 
 .. code:: python
 
-    from promises import Promise
+    from async_promises import Promise
 
 Promise(resolver)
 ~~~~~~~~~~~~~~~~~
 
-This creates and returns a new promises. ``resolver`` must be a function.
+This creates and returns a new Promise. ``resolver`` must be a function.
 The ``resolver`` function is passed two arguments:
 
 1. ``resolve`` should be called with a single argument. If it is called
-   with a non-promises value then the promises is fulfilled with that
-   value. If it is called with a promises (A) then the returned promises
-   takes on the state of that new promises (A).
+   with a non-promise value then the promise is fulfilled with that
+   value. If it is called with a promise (A) then the returned promise
+   takes on the state of that new promise (A).
 2. ``reject`` should be called with a single argument. The returned
-   promises will be rejected with that argument.
+   promise will be rejected with that argument.
 
 Class Methods
 ~~~~~~~~~~~~~
@@ -68,22 +68,22 @@ These methods are invoked by calling ``Promise.methodName``.
 Promise.resolve(value)
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Converts values and foreign promises into Promises/A+ promises. If you
+Converts values and foreign Promises into Promise/A+ Promises. If you
 pass it a value then it returns a Promise for that value. If you pass it
-something that is close to a promises (such as a jQuery attempt at a
-promises) it returns a Promise that takes on the state of ``value``
+something that is close to a promise (such as a jQuery attempt at a
+promise) it returns a Promise that takes on the state of ``value``
 (rejected or fulfilled).
 
 Promise.rejected(value)
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Returns a rejected promises with the given value.
+Returns a rejected promise with the given value.
 
 Promise.all(list)
 ^^^^^^^^^^^^^^^^^
 
-Returns a promises for a list. If it is called with a single argument
-then this returns a promises for a copy of that list with any promises
+Returns a Promise for a list. If it is called with a single argument
+then this returns a Promise for a copy of that list with any Promises
 replaced by their fulfilled values. e.g.
 
 .. code:: python
@@ -97,28 +97,28 @@ Promise.promisify(obj)
 ^^^^^^^^^^^^^^^^^^^^^^
 
 This function wraps the ``obj`` act as a ``Promise`` if possible. Python
-``Future``\ s are supported, with a callback to ``promises.done`` when
+``Future``\ s are supported, with a callback to ``async_promises.done`` when
 resolved.
 
 Promise.for\_dict(d)
 ^^^^^^^^^^^^^^^^^^^^
 
-A special function that takes a dictionary of promises and turns them
-into a promises for a dictionary of values. In other words, this turns an
-dictionary of promises for values into a promises for a dictionary of
+A special function that takes a dictionary of Promises and turns them
+into a Promises for a dictionary of values. In other words, this turns an
+dictionary of Promises for values into a Promises for a dictionary of
 values.
 
 Instance Methods
 ~~~~~~~~~~~~~~~~
 
-These methods are invoked on a promises instance by calling
+These methods are invoked on a Promise instance by calling
 ``myPromise.methodName``
 
-promises.then(on\_fulfilled, on\_rejected)
+async_promises.then(on\_fulfilled, on\_rejected)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This method follows the `Promises/A+
-spec <http://promises-aplus.github.io/promises-spec/>`__. It explains
+This method follows the `Promise/A+
+spec <http://promise-aplus.github.io/promise-spec/>`__. It explains
 things very clearly so I recommend you read it.
 
 Either ``on_fulfilled`` or ``on_rejected`` will be called and they will
@@ -126,27 +126,27 @@ not be called more than once. They will be passed a single argument and
 will always be called asynchronously (in the next turn of the event
 loop).
 
-If the promises is fulfilled then ``on_fulfilled`` is called. If the
-promises is rejected then ``on_rejected`` is called.
+If the Promise is fulfilled then ``on_fulfilled`` is called. If the
+Promise is rejected then ``on_rejected`` is called.
 
-The call to ``.then`` also returns a promises. If the handler that is
-called returns a promises, the promises returned by ``.then`` takes on the
-state of that returned promises. If the handler that is called returns a
-value that is not a promises, the promises returned by ``.then`` will be
+The call to ``.then`` also returns a Promise. If the handler that is
+called returns a Promise, the Promise returned by ``.then`` takes on the
+state of that returned Promise. If the handler that is called returns a
+value that is not a Promise, the Promise returned by ``.then`` will be
 fulfilled with that value. If the handler that is called throws an
-exception then the promises returned by ``.then`` is rejected with that
+exception then the Promise returned by ``.then`` is rejected with that
 exception.
 
-promises.catch(on\_rejected)
+async_promises.catch(on\_rejected)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Sugar for ``promises.then(None, on_rejected)``, to mirror ``catch`` in
+Sugar for ``async_promises.then(None, on_rejected)``, to mirror ``catch`` in
 synchronous code.
 
-promises.done(on\_fulfilled, on\_rejected)
+async_promises.done(on\_fulfilled, on\_rejected)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The same semantics as ``.then`` except that it does not return a promises
+The same semantics as ``.then`` except that it does not return a Promise
 and any exceptions are re-thrown so that they can be logged (crashing
 the application in non-browser environments)
 
@@ -169,11 +169,11 @@ License
 -------
 
 `MIT
-License <https://github.com/syrusakbary/promises/blob/master/LICENSE>`__
+License <https://github.com/syrusakbary/promise/blob/master/LICENSE>`__
 
-.. |travis| image:: https://img.shields.io/travis/syrusakbary/promises.svg?style=flat
-   :target: https://travis-ci.org/syrusakbary/promises
-.. |pypi| image:: https://img.shields.io/pypi/v/promises.svg?style=flat
-   :target: https://pypi.python.org/pypi/promises
-.. |coveralls| image:: https://coveralls.io/repos/syrusakbary/promises/badge.svg?branch=master&service=github
-   :target: https://coveralls.io/github/syrusakbary/promises?branch=master
+.. |travis| image:: https://img.shields.io/travis/p2p-project/promise.svg?style=flat
+   :target: https://travis-ci.org/p2p-project/promise
+.. |pypi| image:: https://img.shields.io/pypi/v/async_promise.svg?style=flat
+   :target: https://pypi.python.org/pypi/async_promise
+.. |coveralls| image:: https://coveralls.io/repos/p2p-project/promise/badge.svg?branch=master&service=github
+   :target: https://coveralls.io/github/p2p-project/promise?branch=master

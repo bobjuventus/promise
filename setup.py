@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name='promises',
+    name='async_promises',
     version='1.1.0',
     description='(Fork of) Promises/A+ implementation for Python',
     long_description=open('README.rst').read(),
@@ -24,7 +24,7 @@ setup(
     ],
 
     keywords='concurrent future deferred promise',
-    packages=["promises"],
+    packages=["async_promises"],
     install_requires=[
         'typing',
     ],
