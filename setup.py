@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='async_promises',
-    version='1.1.0',
+    version='1.1.1',
     description='(Fork of) Promises/A+ implementation for Python',
     long_description=open('README.rst').read(),
     url='https://github.com/p2p-today/promise',
