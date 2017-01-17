@@ -115,7 +115,7 @@ These methods are invoked on a Promise instance by calling
 ``myPromise.methodName``
 
 async_promises.then(on\_fulfilled, on\_rejected)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This method follows the `Promise/A+
 spec <http://promise-aplus.github.io/promise-spec/>`__. It explains
@@ -138,13 +138,13 @@ exception then the Promise returned by ``.then`` is rejected with that
 exception.
 
 async_promises.catch(on\_rejected)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Sugar for ``async_promises.then(None, on_rejected)``, to mirror ``catch`` in
 synchronous code.
 
 async_promises.done(on\_fulfilled, on\_rejected)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The same semantics as ``.then`` except that it does not return a Promise
 and any exceptions are re-thrown so that they can be logged (crashing
