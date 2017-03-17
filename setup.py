@@ -1,8 +1,29 @@
-from setuptools import setup
+import sys
+from setuptools import setup, find_packages
+
+if sys.version_info[0] < 3:
+    import __builtin__ as builtins
+else:
+    import builtins
+
+builtins.__SETUP__ = True
+
+version = __import__('promise').get_version()
+
+
+IS_PY3 = sys.hexversion >= 0x03000000
+
+tests_require = [
+    'pytest>=2.7.3', 'pytest-cov', 'coveralls', 'futures', 'pytest-benchmark',
+    'mock',
+]
+if IS_PY3:
+    tests_require += ['pytest-asyncio']
+
 
 setup(
     name='promise',
-    version='1.0.1',
+    version=version,
     description='Promises/A+ implementation for Python',
     long_description=open('README.rst').read(),
     url='https://github.com/syrusakbary/promise',
@@ -23,11 +44,12 @@ setup(
         'Programming Language :: Python :: Implementation :: PyPy',
         'License :: OSI Approved :: MIT License',
     ],
-
     keywords='concurrent future deferred promise',
-    packages=["promise"],
+    packages=find_packages(exclude=['tests']),
+    extras_require={
+        'test': tests_require,
+    },
     install_requires=[
         'typing',
     ],
-    tests_require=['pytest>=2.7.3', 'futures'],
-)
+    tests_require=tests_require, )
